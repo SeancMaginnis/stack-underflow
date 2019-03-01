@@ -9,9 +9,9 @@ let Post = require('./post')
 
 let comment = new Schema({
   username: { type: String, required: true },
-  timeStamp: { type: String, required: true },
+  timestamp: { type: String, required: true },
   post: { type: ObjectId, ref: "Post", virtual: true },
-  body: { type: String, required: true }
+  description: { type: String, required: true }
 
 
 })

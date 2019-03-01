@@ -4,7 +4,7 @@ export default class Post {
     this.description = data.description
     this.img = data.img
     this.username = data.username
-    this.timestamp = data.createdAt || Date.now()
+    this.timestamp = data.createdAt || data.timestamp || Date.now()
 
   }
   getTemplate() {
@@ -13,7 +13,7 @@ export default class Post {
         <img class="card-img-top" src="${this.img}" alt="">
             <div class="card-body">
                 <h5 class="card-title">${this.title}</h5>
-                <p class="card-text">${this.username}---${this.timestamp} </p>
+                <p class="card-text">${this.username}---${this.getTime()} </p>
                 <p class="card-text">${this.description}</p>
               
             </div>

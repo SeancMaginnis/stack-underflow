@@ -17,8 +17,8 @@ let commentRoutes = require('./server-assets/routes/comment-routes')
 let subCommentRoutes = require('./server-assets/routes/subComment-routes')
 
 server.use('/api/posts', postRoutes.router)
-server.use('/apie/comments', commentRoutes.router)
-server.use('/api/subComments', subCommentRoutes.router)
+server.use('/api/comments', commentRoutes.router)
+server.use('/api/subcomments', subCommentRoutes.router)
 
 
 

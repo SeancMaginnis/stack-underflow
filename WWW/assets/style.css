@@ -1,8 +1,33 @@
-/* #top{
-    min-height:15vh; 
-    max-height:15vh;
+body{
+    /* background-image: url(https://i.stack.imgur.com/kq8EX.png); */
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    font-family: 'Roboto Mono', monospace;
 }
-#mid{
+
+.card{
+background-color:rgba(255, 136, 0, 0.137);
+align-items: center!important;
+color:white;
+text-shadow: 1px 1px black;
+border-top-color:black;
+border-right-color: rgba(255, 230, 0, 0.397);
+border-right-style:solid;
+border-top-style:solid;
+}
+
+#top{
+    /* min-height:15vh; 
+    max-height:15vh; */
+    background-color:rgba(0, 0, 0, 0.432);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* #mid{
     min-height:25vh; 
     max-height:25vh;
     
@@ -10,4 +35,48 @@
 #bot{
     min-height:20vh; 
     max-height:60vh;
-} */
+}  */
+
+/* Add a black background color to the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: rgba(255, 136, 0, 0.137);
+    max-height: 7vh;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    display: block;
+    color: white;
+    text-shadow: 1px 1px black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Style the "active" element to highlight the current page */
+  .topnav a.active {
+    background-color: rgba(255, 136, 0, 0.137);
+    color: white;
+  }
+  
+  /* Style the search box inside the navigation bar */
+  .topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+  .flip{
+    transform: rotate(180deg);
+}
