@@ -1,4 +1,5 @@
 import Post from "../../models/post.js";
+import Comment from "../../models/comment.js"
 
 //private
 // @ts-ignore
@@ -7,12 +8,16 @@ let _api = axios.create({
 })
 
 let _state = {
-  posts: []
+  posts: [],
+  activePost: {},
+  comments: []
   //active post will need to go here
 }
 
 let _subscribers = {
-  posts: []
+  posts: [],
+  activePost: [],
+  comments: []
 }
 
 function setState(prop, data) {
@@ -28,6 +33,26 @@ export default class PostService {
 
   get Posts() {
     return _state.posts.map(p => new Post(p))
+  }
+
+  get ActivePost() {
+    return _state.activePost
+  }
+
+  get Comments() {
+    return _state.comments
+  }
+
+  // getComments(id) {
+  //   return _state.comments
+  // }
+
+  getApiComments(id) {
+    _api.get('posts/' + id + '/comments')
+      .then(res => {
+        let data = res.data.map(c => new Comment(c))
+        setState('comments', data)
+      })
   }
 
   getApiPosts() {
@@ -50,6 +75,14 @@ export default class PostService {
     _api.delete('posts/' + id)
       .then(res => {
         this.getApiPosts()
+      })
+  }
+
+  setActivePost(id) {
+    _api.get('posts/' + id)
+      .then(res => {
+        let data = new Post(res.data)
+        setState('activePost', data)
       })
   }
 

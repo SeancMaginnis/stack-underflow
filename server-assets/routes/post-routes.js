@@ -16,7 +16,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.get('/:id/comments', (req, res, next) => {
-  Posts.findById({ comments: req.params.id })
+  Comments.find({ post: req.params.id })
     .then(comments => res.send(comments))
     .catch(err => res.status(400).send(err))
 })

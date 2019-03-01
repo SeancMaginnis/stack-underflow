@@ -13,6 +13,20 @@ function draw() {
   });
 
   document.getElementById('posts').innerHTML = template
+}
+
+
+
+function drawActive() {
+  let activePost = _ps.ActivePost
+  document.getElementById('posts').innerHTML = activePost.getActiveTemplate()
+
+  let comments = _ps.Comments
+  let commentTemplate = ''
+  comments.forEach(c => {
+    commentTemplate += c.getTemplate()
+  })
+  document.getElementById('comment').innerHTML = commentTemplate;
 
 }
 
@@ -22,6 +36,7 @@ function draw() {
 export default class PostController {
   constructor() {
     _ps.addSubscriber('posts', draw)
+    _ps.addSubscriber('activePost', drawActive)
     _ps.getApiPosts()
   }
   addPost(event) {
@@ -39,7 +54,20 @@ export default class PostController {
   deletePost(id) {
     _ps.deletePost(id)
   }
+
+  setActivePost(id) {
+    _ps.getApiComments(id)
+    _ps.setActivePost(id)
+  }
+  drawComment() {
+    let template = ''
+    let comment = _ps.Comments
+    comment.forEach(c => {
+
+    })
+  }
   // getPosts() {
   //     _ps.getApiPosts()
   // }
+
 }

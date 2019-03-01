@@ -1,23 +1,29 @@
 export default class Post {
   constructor(data) {
+    this._id = data._id
     this.title = data.title
     this.description = data.description
-    this.img = data.img
+    this.img = data.img || 'http://www.agarioskins.org/wp-content/uploads/2015/07/trollface-custom-skin.png'
     this.username = data.username
     this.timestamp = data.createdAt || data.timestamp || Date.now()
 
   }
   getTemplate() {
     return `
-    <div class="col-3 card">
-        <img class="card-img-top" src="${this.img}" alt="">
-            <div class="card-body">
-                <h5 class="card-title">${this.title}</h5>
-                <p class="card-text">${this.username}---${this.getTime()} </p>
-                <p class="card-text">${this.description}</p>
-              
+    <div class="col-10 offset-1 plain-card" onclick="app.controllers.postController.setActivePost('${this._id}')">
+        <div class="row">
+            <div class="col-4 left-side">
+                <h5 class="">${this.title}</h5>
             </div>
-        </div>`
+            <div class="col-4 right-side">
+                <img class="img-thumbnail" src="${this.img}">
+            </div>
+            <div class="col-4 right-side">
+            <h6 class="">${this.username}</h6>
+                <p class=""> ${this.getTime()}</p>
+            </div>
+        </div>
+    </div>`
 
   }
 
@@ -28,4 +34,24 @@ export default class Post {
 
 
   }
+
+  getActiveTemplate() {
+    return `
+    <div class="col-10 offset-1 plain-card">
+        <div class="row">
+        <h3 class="">${this.title}</h3>
+        <h6 class="">${this.username}</h6>
+        <p class=""> ${this.getTime()}</p>
+        <img class="" src="${this.img}">
+        <h6 class="">${this.description}</h6>
+
+
+
+    </div>
+    <div id="comment"></div>
+    `
+  }
 }
+
+
+{/* <img class="card-img-top" src="${this.img}" alt=""> */ }
