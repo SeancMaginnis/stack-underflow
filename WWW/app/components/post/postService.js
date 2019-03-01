@@ -1,6 +1,7 @@
 import Post from "../../models/post.js";
 
 //private
+// @ts-ignore
 let _api = axios.create({
   baseURL: '//localhost:3000/api'
 })
@@ -32,7 +33,7 @@ export default class PostService {
   getApiPosts() {
     _api.get('posts')
       .then(res => {
-        let data = res.data.data.map(p => new Post(p))
+        let data = res.data.map(p => new Post(p))
         setState('posts', data)
       })
   }

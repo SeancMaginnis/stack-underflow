@@ -1,13 +1,15 @@
 
+let cors = require('cors')
 let express = require('express')
 let bp = require('body-parser')
 let server = express()
 let port = 3000
 
-require('./server-assets/db/gearhost-config')
+require('./server-assets/db/gearhost-config.js')
 
 server.use(bp.json())
 server.use(bp.urlencoded({ extended: true }))
+server.use(cors())
 
 //Routes Here
 let postRoutes = require('./server-assets/routes/post-routes')
@@ -26,6 +28,6 @@ server.use('*', (req, res, next) => {
 })
 
 server.listen(port, () => {
-  console.log('serveris running on port', port)
+  console.log('SUCCESS!!!', port)
 
 })

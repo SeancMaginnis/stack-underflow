@@ -12,9 +12,10 @@ function draw() {
     template += p.getTemplate();
   });
 
-  document.getElementById('main').innerHTML = template
-  //document.getElementById Form will go here!
+  document.getElementById('posts').innerHTML = template
+
 }
+
 
 //public
 
@@ -27,7 +28,10 @@ export default class PostController {
     event.preventDefault();
     let form = event.target
     let newPost = {
-      //post model props go here "make: form.make.value,"
+      title: form.title.value,
+      username: form.username.value,
+      description: form.description.value,
+      img: form.img.value
     }
     _ps.addPost(newPost)
     form.reset()

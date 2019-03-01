@@ -9,14 +9,15 @@ export default class Post {
   }
   getTemplate() {
     return `
-<div class="col-12">
-    <p>${this.title}</p>
-    <p>${this.username}</p>
-    <p>${this.timestamp}</p>
-    <p>${this.description}</p>
-    <p>${this.img}</p>
-</div>
-  `
+    <div class="col-3 card">
+        <img class="card-img-top" src="${this.img}" alt="">
+            <div class="card-body">
+                <h5 class="card-title">${this.title}</h5>
+                <p class="card-text">${this.username}---${this.timestamp} </p>
+                <p class="card-text">${this.description}</p>
+              
+            </div>
+        </div>`
 
   }
 

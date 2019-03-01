@@ -2,6 +2,14 @@ let Comments = require('../models/comment')
 let router = require('express').Router()
 let Subcomments = require('../models/subComment')
 
+//only for testing
+
+router.get('', (req, res, next) => {
+  Comments.find({})
+    .then(comments => res.send(comments))
+    .catch(err => res.status(400).send(err))
+})
+
 
 router.get('/:id', (req, res, next) => {
   Comments.findById(req.params.id)
@@ -22,8 +30,21 @@ router.post('', (req, res, next) => {
 
 
 router.put('/:id', async (req, res, next) => {
-
+  try {
+    let comment = await Comments.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    res.send(comment)
+  } catch (err) {
+    res.status(400).send(err)
+  }
 })
+
+router.delete('/:id', (req, res, next) => {
+  Comments.findByIdAndDelete(req.params.id)
+    .then(() => res.send('CENSORSHIP'))
+    .catch(err => res.status(400).send(err))
+})
+
+
 
 
 module.exports = { router }

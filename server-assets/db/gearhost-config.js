@@ -1,7 +1,7 @@
 let mongoose = require('mongoose')
 
 
-const connectionString = 'mongodb://teamdiscovery:teamdiscovery@1@den1.mongo1.gear.host:27001/teamdicovery'
+const connectionString = 'mongodb://teamdiscovery:teamd**@den1.mongo1.gear.host:27001/teamdiscovery'
 
 let connection = mongoose.connection
 

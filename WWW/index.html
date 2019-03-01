@@ -12,9 +12,35 @@
 </head>
 
 <body>
-  <section>
-    <div class="row">
-      <div class="col-12" id="main">
+  <section class="container-fluid">
+    <div class="row" id="top">
+      <div class="col-12 d-flex justify-content-center" id="">
+        <h1>Header</h1>
+      </div>
+    </div>
+  </section>
+  <br>
+  <section class="container-fluid">
+    <div class="row" id="mid">
+      <div class="col-2 d-flex justify-content-center" id="">
+        <button onclick="app.controllers.postController.drawForm()">Create Post</button>
+      </div>
+      <div class="col-8 offset-2">
+        <form onsubmit="app.controllers.postController.addPost(event)">
+          <input type="text" name="title" placeholder="Title" required>
+          <input type="text" name="username" placeholder="User Name" required>
+          <input type="text" name="description" placeholder="Description">
+          <input type="url" name="img" placeholder="Image Url">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <br>
+  <section class="container-fluid">
+    <div class="row" id="posts">
+      <div class="col-12 d-flex justify-content-center" id="posts">
+        <h1>Posts Section</h1>
       </div>
     </div>
   </section>
@@ -23,3 +49,5 @@
 </body>
 
 </html>
+
+<img src="">
