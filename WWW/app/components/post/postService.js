@@ -4,7 +4,7 @@ import Comment from "../../models/comment.js"
 //private
 // @ts-ignore
 let _api = axios.create({
-  baseURL: '//localhost:3000/api'
+  baseURL: '/api'
 })
 
 let _state = {
@@ -52,6 +52,9 @@ export default class PostService {
       .then(res => {
         let data = res.data.map(c => new Comment(c))
         setState('comments', data)
+        if (_state.activePost) {
+          setState('activePost', _state.activePost)
+        }
       })
   }
 
@@ -70,6 +73,15 @@ export default class PostService {
         this.getApiPosts()
       })
   }
+  addComment(rawComment) {
+    rawComment.post = _state.activePost._id
+    let newComment = new Comment(rawComment)
+    _api.post('comments', newComment)
+      .then(res => {
+        debugger
+        this.getApiComments(newComment.post)
+      })
+  }
 
   deletePost(id) {
     _api.delete('posts/' + id)
@@ -83,6 +95,20 @@ export default class PostService {
       .then(res => {
         let data = new Post(res.data)
         setState('activePost', data)
+      })
+  }
+
+  upVote(id) {
+    let data = _state.activePost.upVote++
+    _api.put('posts/' + id, data)
+      .then(res => {
+        this.setActivePost(id)
+      })
+  }
+  deleteComment(id) {
+    _api.delete('comments/' + id)
+      .then(res => {
+        this.getApiComments()
       })
   }
 

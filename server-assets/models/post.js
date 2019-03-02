@@ -10,7 +10,8 @@ let post = new Schema({
   description: { type: String, required: true, default: 'See Image' },
   img: { type: String },
   username: { type: String },
-  vote: { type: Number }
+  upVote: { type: Number, default: 0 },
+  downVote: { type: Number }
 }, { timestamps: true })
 
 

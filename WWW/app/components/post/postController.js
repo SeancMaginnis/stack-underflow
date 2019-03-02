@@ -54,6 +54,17 @@ export default class PostController {
   deletePost(id) {
     _ps.deletePost(id)
   }
+  addComment(event) {
+    event.preventDefault();
+    let form = event.target
+    let newComment = {
+      username: form.username.value,
+      description: form.description.value,
+      img: form.img.value
+    }
+    _ps.addComment(newComment)
+    form.reset()
+  }
 
   setActivePost(id) {
     _ps.getApiComments(id)
@@ -66,8 +77,19 @@ export default class PostController {
 
     })
   }
+
+  drawHome() {
+    draw()
+  }
+
+  upVote(id) {
+    _ps.upVote(id)
+  }
   // getPosts() {
   //     _ps.getApiPosts()
   // }
+  deleteComment(id) {
+    _ps.deleteComment(id)
 
+  }
 }

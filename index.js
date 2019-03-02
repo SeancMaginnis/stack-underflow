@@ -7,6 +7,8 @@ let port = 3000
 
 require('./server-assets/db/gearhost-config.js')
 
+server.use(express.static(__dirname + "/WWW"))
+
 server.use(bp.json())
 server.use(bp.urlencoded({ extended: true }))
 server.use(cors())

@@ -3,9 +3,11 @@ export default class Post {
     this._id = data._id
     this.title = data.title
     this.description = data.description
-    this.img = data.img || 'http://www.agarioskins.org/wp-content/uploads/2015/07/trollface-custom-skin.png'
+    this.img = data.img
     this.username = data.username
     this.timestamp = data.createdAt || data.timestamp || Date.now()
+    this.upVote = data.upVote
+    this.downVote = data.downVote
 
   }
   getTemplate() {
@@ -39,16 +41,32 @@ export default class Post {
     return `
     <div class="col-10 offset-1 plain-card">
         <div class="row">
-        <h3 class="">${this.title}</h3>
-        <h6 class="">${this.username}</h6>
-        <p class=""> ${this.getTime()}</p>
-        <img class="" src="${this.img}">
-        <h6 class="">${this.description}</h6>
-
-
-
+            <div class="col-10">
+                <h3 class="">${this.title}</h3>
+                <h6 class="">${this.username}</h6>
+                <p class=""> ${this.getTime()}</p>
+                <img class="active-image" src="${this.img}">
+                <h6 class="">${this.description}</h6>
+                <p>${this.upVote}</p>
+            </div>
+            <div class="col-1">
+                <button type="submit" onclick="app.controllers.postController.deletePost('${this._id}')">Remove Post</button>
+                <button type="submit" onclick="app.controllers.postController.upVote('${this._id}')">Up Vote</button>
+                <button type="submit" onclick="app.controllers.postController.downVote('${this._id}')">Down Vote</button>
+            </div>
+            <br>
+            <div class="col-12"> 
+                <h3> Post Reply </h3>  
+                <form onsubmit="app.controllers.postController.addComment(event)">
+                <input type="text" name="username" placeholder="User Name" required>
+                <input type="text" name="description" placeholder="Description">
+                <input type="url" name="img" placeholder="Image URL (Optional)">
+                <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>          
+        <div class="row"id="comment"></div>
     </div>
-    <div id="comment"></div>
     `
   }
 }

@@ -9,9 +9,11 @@ let Post = require('./post')
 
 let comment = new Schema({
   username: { type: String, required: true },
-  post: { type: ObjectId, ref: "Post", virtual: true },
-  description: { type: String, required: true }
-} { timestamps: true })
+  post: { type: ObjectId, ref: "Post", required: true },
+  description: { type: String, required: true },
+  img: { type: String },
+  vote: { type: Number }
+}, { timestamps: true })
 
 comment.pre("remove", function (next) {
   Subcomment.remove({ comment: this._id })
