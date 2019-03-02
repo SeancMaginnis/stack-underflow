@@ -1,5 +1,3 @@
-import { ENGINE_METHOD_DIGESTS } from "constants";
-
 export default class Post {
   constructor(data) {
     this._id = data._id
@@ -65,7 +63,6 @@ export default class Post {
             </span>
             <span onclick="app.controllers.postController.refresh()"class="icontwo"><i class="fas fa-redo"></i>
             </span>
-               <span onclick="app.controllers.postController.editPost(event, '${this._id}')"><i class="far fa-edit"></i>
              </div>
             <div class="col-12 plain-card"> 
                 <h3> Post Reply </h3>  
@@ -81,9 +78,7 @@ export default class Post {
     </div>
     `
   }
-
-
-
 }
+
 
 {/* <img class="card-img-top" src="${this.img}" alt=""> */ }
