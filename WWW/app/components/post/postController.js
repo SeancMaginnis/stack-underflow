@@ -6,8 +6,6 @@ let _ps = new PostService()
 
 function draw() {
   let posts = _ps.Posts
-  console.log(posts);
-
   posts.sort((a, b) => {
     return b.score - a.score
   })
@@ -35,7 +33,6 @@ function drawActive() {
     commentTemplate += c.getTemplate()
   })
   document.getElementById('comment').innerHTML = commentTemplate;
-
 }
 
 
@@ -106,4 +103,26 @@ export default class PostController {
     _ps.deleteComment(id)
 
   }
+
+  deleteSubComment(parentId, id) {
+    _ps.deleteSubComment(parentId, id)
+  }
+
+  editPost(event) {
+    event.preventDefault();
+    let form = event.target
+    let newPost = {
+      title: form.title.value,
+      username: form.username.value,
+      description: form.description.value,
+      img: form.img.value
+    }
+    _ps.editPost(newPost)
+    form.reset()
+  }
+  refresh() {
+    _ps.setActivePost(_ps.ActivePost._id)
+  }
+
+  // subCommentVote(parentId, Id, num)  
 }

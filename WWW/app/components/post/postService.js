@@ -89,11 +89,20 @@ export default class PostService {
       })
   }
 
+  editPost(newPost) {
+    _api.put(newPost.id, newPost)
+      .then(res => {
+        this.getApiPosts()
+      })
+  }
+
+
   setActivePost(id) {
     _api.get('posts/' + id)
       .then(res => {
         let data = new Post(res.data)
         setState('activePost', data)
+        this.getApiComments(id)
       })
   }
 
@@ -139,4 +148,11 @@ export default class PostService {
       })
   }
 
+
+  deleteSubComment(parentId, id) {
+    _api.delete('comments/' + parentId + 'subcomments/' + id)
+      .then(res => {
+        this.getApiComments(_state.activePost._id)
+      })
+  }
 }

@@ -46,6 +46,52 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => res.status(400).send(err))
 })
 
+//Subcomments
 
+//Create SubComment
+router.post('/:commentId/subComments', (req, res, next) => {
+  // SubComments.create(req.body)
+  //   .then(subComments => res.send(subComments))
+  //   .catch(err => res.status(400).send(err))
+  Comments.findById(req.params.commentId)
+    .then(comment => {
+      comment.subComments.push(req.body)
+      comment.save(err => {
+        if (err) {
+          res.status(400).send(err)
+        }
+        res.status(201).send(comment)
+      })
+    })
+})
+
+//Edit Subcomment
+router.put('/:commentId/subComments/:id', async (req, res, next) => {
+  Comments.findById(req.params.commentId)
+    .then(comment => {
+      let subcomment = comment.subComments.id(req.params.id)
+      comment.subComments.splice(comment.subComments.indexOf(subcomment), 1, req.body)
+      comment.save(err => {
+        if (err) {
+          res.status(400).send(err)
+        }
+        res.status(201).send(comment)
+      })
+    })
+})
+
+//delete subcomment
+router.delete('/:commentId/subComments/:id', (req, res, next) => {
+  Comments.findById(req.params.commentId)
+    .then(comment => {
+      comment.subComments.id(req.params.id).remove()
+      comment.save(err => {
+        if (err) {
+          res.status(400).send(err)
+        }
+        res.status(201).send(comment)
+      })
+    })
+})
 
 module.exports = { router }

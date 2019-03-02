@@ -13,4 +13,4 @@ let subComment = new Schema({
   vote: { type: Number }
 }, { timestamps: true })
 
-module.exports = mongoose.model("SubComment", subComment)
+// module.exports = mongoose.model("SubComment", subComment)

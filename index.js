@@ -16,11 +16,11 @@ server.use(cors())
 //Routes Here
 let postRoutes = require('./server-assets/routes/post-routes')
 let commentRoutes = require('./server-assets/routes/comment-routes')
-let subCommentRoutes = require('./server-assets/routes/subComment-routes')
+// let subCommentRoutes = require('./server-assets/routes/subComment-routes')
 
 server.use('/api/posts', postRoutes.router)
 server.use('/api/comments', commentRoutes.router)
-server.use('/api/subcomments', subCommentRoutes.router)
+// server.use('/api/subcomments', subCommentRoutes.router)
 
 
 

@@ -23,8 +23,10 @@ border-top-style:solid;
 }
 .staticform{
     background-color:rgba(255, 136, 0, 0.137);
+    color:#fd7e14;
     padding-top:15px;
     padding-bottom:15px;
+    /* padding-left:200px; */
 }
 
 .plain-card{
@@ -114,12 +116,12 @@ border-top-style:solid;
     transform: rotate(180deg);
 }
 .active-image{
-    max-width:60vw;
-    max-height:60vh;
+    max-width:100%;
+    max-height:100%;
 }
-/* #text-box{
-  height:200px;
-  width:600px;
-  margin-top: 30px;
-
-} */
+.nob{
+  list-style-type: none;
+}
+.icon{
+  font-size: 50px;
+}
