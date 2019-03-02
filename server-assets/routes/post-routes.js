@@ -39,7 +39,8 @@ router.put('/:id', async (req, res, next) => {
 
 
 router.delete('/:id', (req, res, next) => {
-  Posts.findByIdAndDelete(req.params.id)
+  Posts.findById(req.params.id)
+    .then(post => post.remove())
     .then(() => res.send('THIS POST WAS BOTTOM TO TOP'))
     .catch(err => res.status(400).send(err))
 })

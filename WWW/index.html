@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style.css">
   <title>Stack Underflow</title>
 </head>
@@ -31,16 +33,15 @@
   <br>
   <section class="container-fluid">
     <div class="row staticform" id="mid">
-      <div class="col-2 d-flex justify-content-center " id="">
-        <button onclick="app.controllers.postController.drawForm()">Create Post</button>
-      </div>
-      <div class="col-8 offset-2">
+      <img src="" alt="">
+      <div class="col-8 offset-4 d-flex">
         <form onsubmit="app.controllers.postController.addPost(event)">
           <input type="text" name="title" placeholder="Title" required>
           <input type="text" name="username" placeholder="User Name" required>
-          <input type="text" name="description" placeholder="Description">
           <input type="url" name="img" placeholder="Image URL">
           <button type="submit">Submit</button>
+          <textarea name="description" class="mt-2" rows="6" cols="75" wrap="soft" maxlength=""
+            style="overflow:hidden; resize:none;" placeholder="Message"></textarea>
         </form>
       </div>
     </div>

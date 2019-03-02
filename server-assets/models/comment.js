@@ -12,11 +12,11 @@ let comment = new Schema({
   post: { type: ObjectId, ref: "Post", required: true },
   description: { type: String, required: true },
   img: { type: String },
-  vote: { type: Number }
+  vote: { type: Number, default: 0 }
 }, { timestamps: true })
 
 comment.pre("remove", function (next) {
-  Subcomment.remove({ comment: this._id })
+  Subcomment.deleteMany({ post: this._id })
     .then(() => next())
     .catch(err => next(err))
 })

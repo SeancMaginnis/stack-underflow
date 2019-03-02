@@ -38,12 +38,13 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
+
 router.delete('/:id', (req, res, next) => {
-  Comments.findByIdAndDelete(req.params.id)
-    .then(() => res.send('CENSORSHIP'))
+  Comments.findById(req.params.id)
+    .then(post => post.remove())
+    .then(() => res.send('THIS POST WAS BOTTOM TO TOP'))
     .catch(err => res.status(400).send(err))
 })
-
 
 
 

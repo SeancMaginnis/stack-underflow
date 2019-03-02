@@ -78,7 +78,6 @@ export default class PostService {
     let newComment = new Comment(rawComment)
     _api.post('comments', newComment)
       .then(res => {
-        debugger
         this.getApiComments(newComment.post)
       })
   }
@@ -100,15 +99,43 @@ export default class PostService {
 
   upVote(id) {
     let data = _state.activePost.upVote++
-    _api.put('posts/' + id, data)
+    let active = _state.activePost
+    _api.put('posts/' + id, active)
       .then(res => {
         this.setActivePost(id)
       })
   }
+
+  downVote(id) {
+    let data = _state.activePost.downVote--
+    let active = _state.activePost
+    _api.put('posts/' + id, active)
+      .then(res => {
+        this.setActivePost(id)
+      })
+  }
+  commentVote(id, num) {
+    let comment = _state.comments.find(c => c._id == id)
+    comment.vote += num
+    _api.put('comments/' + id, comment)
+      .then(res => {
+        setState('activePost', _state.activePost)
+      })
+
+    // let house = _state.houses.find(h => h._id == id)
+    // house.price = parseInt(house.price)
+    // house.price++
+    // _api.put('houses/' + house._id, house)
+    //   .then(res => {
+    //     this.getApiHouses()
+    //   })
+  }
+
   deleteComment(id) {
     _api.delete('comments/' + id)
       .then(res => {
-        this.getApiComments()
+        console.log(res)
+        this.getApiComments(_state.activePost._id)
       })
   }
 

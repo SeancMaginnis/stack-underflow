@@ -11,8 +11,6 @@ let subComment = new Schema({
   comment: { type: ObjectId, ref: "Comment", required: true },
   body: { type: String, required: true },
   vote: { type: Number }
-
-
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("SubComment", subComment)

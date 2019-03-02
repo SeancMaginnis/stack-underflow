@@ -6,6 +6,11 @@ let _ps = new PostService()
 
 function draw() {
   let posts = _ps.Posts
+  console.log(posts);
+
+  posts.sort((a, b) => {
+    return b.score - a.score
+  })
   let template = ''
 
   posts.forEach(p => {
@@ -20,8 +25,11 @@ function draw() {
 function drawActive() {
   let activePost = _ps.ActivePost
   document.getElementById('posts').innerHTML = activePost.getActiveTemplate()
-
   let comments = _ps.Comments
+  comments.sort((a, b) => {
+    return b.vote - a.vote
+  })
+
   let commentTemplate = ''
   comments.forEach(c => {
     commentTemplate += c.getTemplate()
@@ -85,9 +93,15 @@ export default class PostController {
   upVote(id) {
     _ps.upVote(id)
   }
-  // getPosts() {
-  //     _ps.getApiPosts()
-  // }
+
+  downVote(id) {
+    _ps.downVote(id)
+  }
+
+  commentVote(id, num) {
+    _ps.commentVote(id, num)
+  }
+
   deleteComment(id) {
     _ps.deleteComment(id)
 

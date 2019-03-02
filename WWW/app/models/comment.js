@@ -6,18 +6,24 @@ export default class Comment {
     this.description = data.description
     this._id = data._id
     this.img = data.img
+    this.vote = data.vote
   }
 
   getTemplate() {
     return `
-    <div class="col-8 offset-2 comment-card">
+    <div class="col-6 offset-2 comment-card">
         <p>${this.username} - ${this.getTime()}</p>
         <p>${this.description}</p>
-        <img src=${this.img}>
-        
+        <img class="active-image" src="${this.img}">
+        <p>Votes: ${this.vote}
     </div>
     <div class="col-2 comment-card">
-        <button type="submit" onclick="app.controllers.postController.deleteComment('${this._id}')">Remove Comment</button>
+        <span onclick="app.controllers.postController.deleteComment('${this._id}')"><i class="fas fa-ban"></i>
+          </span>
+        <button type="submit" onclick="app.controllers.postController.commentVote('${this._id}', 1)">Up</button>
+        <button type="submit" onclick="app.controllers.postController.commentVote('${this._id}', -1)">down</button>
+
+        
     </div>
     `
   }
