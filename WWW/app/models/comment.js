@@ -30,16 +30,27 @@ export default class Comment {
           <span onclick="app.controllers.postController.commentVote('${this._id}', -1)" class="icon"><i class="far fa-thumbs-down"></i>
           </span> 
           <p>Votes: ${this.vote} 
+          <span onclick="document.getElementById('${this._id}subForm').removeAttribute('hidden')"class="icontwo"><i class="fab fa-replyd"></i>
+          </span> 
     </div>
-    <div class="row" id="subcomment"></div>
+    <div class="col-8 offset-2 plain-card"> 
+                <form id="${this._id}subForm" hidden onsubmit="app.controllers.postController.addSubComment(event, '${this._id}')">
+                <input type="text" name="username" placeholder="User Name" required>
+                <input type="text" name="description" placeholder="Response">
+                <input type="url" name="url" placeholder="Image URL (Optional)">
+                <button type="submit">Submit</button>
+                </form>
+            </div>
+    <div class="row">${this.Subcomments()}</div>
     `
   }
 
-  get Subcomments() {
+  Subcomments() {
     //generate subcomment template
+
     let template = ''
     this.subComments.sort((a, b) => {
-      return b.vote - b.vote
+      return b.vote - a.vote
     })
     // this.subComments.sort((a, b) => {
     //   let aDate = new Date(a.createdAt).getTime()
@@ -47,7 +58,8 @@ export default class Comment {
     //   return aDate - bDate
     // })
     this.subComments.forEach(sc => {
-      template += sc.getTemplate(this._id)
+
+      template += sc.getTemplate(`${this._id}`)
     })
     return template
   }

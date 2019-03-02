@@ -5,26 +5,26 @@ export default class Subcomment {
     this.post = data.post
     this.description = data.description
     this._id = data._id
-    this.img = data.img
+    this.url = data.url
     this.vote = data.vote
     this.createdAt = data.createdAt || 0
   }
 
   getTemplate(parentId) {
     return `
-      <div class="col-6 offset-2 comment-card">
-        <p>${this.username} - ${this.getTime()} <span onclick="app.controllers.postController.deleteSubComment('parentId', ${this._id}')"><i class="fas fa-ban"></i>
+      <div class="col-6 offset-4 comment-card">
+        <p>${this.username} - ${this.getTime()} <span onclick="app.controllers.postController.deleteSubComment('${parentId}', '${this._id}')"><i class="fas fa-ban"></i>
         </span></p>
-        <img class="active-image" src="${this.img}">
+        <img class="active-image" src="${this.url}">
         <p>${this.description}</p>
       
     </div>
     <div class="col-2 comment-card">
-          <span onclick="app.controllers.postController.subCommentVote('${parentId}','${this._id}', 1)" class="icon"><i class="far fa-thumbs-up"></i>
+          <span onclick="app.controllers.postController.subCommentVote('${parentId}','${this._id}', 1)" class="icontwo"><i class="far fa-thumbs-up"></i>
           </span>
-          <span onclick="app.controllers.postController.subCommentVote('${parentId}','${this._id}', -1) class="icon"><i class="far fa-thumbs-down"></i>
+          <span onclick="app.controllers.postController.subCommentVote('${parentId}','${this._id}', -1)" class="icontwo"><i class="far fa-thumbs-down"></i>
           </span> 
-          <p>Votes: ${this.vote} 
+          <p>Votes: ${this.vote}</p> 
         
         
     </div>`

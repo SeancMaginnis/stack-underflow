@@ -82,6 +82,14 @@ export default class PostService {
       })
   }
 
+  addSubComment(rawSubComment) {
+    _api.put('comments/' + rawSubComment.commentId + '/subcomments', rawSubComment)
+      .then(res => {
+        console.log(res)
+        this.getApiComments(_state.activePost._id)
+      })
+  }
+
   deletePost(id) {
     _api.delete('posts/' + id)
       .then(res => {
@@ -150,9 +158,18 @@ export default class PostService {
 
 
   deleteSubComment(parentId, id) {
-    _api.delete('comments/' + parentId + 'subcomments/' + id)
+    _api.delete('comments/' + parentId + '/subcomments/' + id)
       .then(res => {
         this.getApiComments(_state.activePost._id)
+      })
+  }
+  subCommentVote(parentId, Id, num) {
+    let comment = _state.comments.find(c => c._id == parentId)
+    let subComment = comment.subComments.find(s => s._id == Id)
+    subComment.vote += num
+    _api.put('comments/' + parentId + '/subcomments/' + Id, subComment)
+      .then(res => {
+        setState('activePost', _state.activePost)
       })
   }
 }

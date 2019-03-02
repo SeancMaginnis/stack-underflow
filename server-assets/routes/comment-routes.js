@@ -1,6 +1,5 @@
 let Comments = require('../models/comment')
 let router = require('express').Router()
-let Subcomments = require('../models/subComment')
 
 //only for testing
 
@@ -38,6 +37,26 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
+//this route is responsible for adding and removing subcomments from a comment
+router.put('/:id/subcomments', (req, res, next) => {
+  Comments.findById(req.params.id)
+    .then(comment => {
+      if (!req.body._id) {
+        comment.subComments.push(req.body)
+      } else {
+        for (let i = 0; i < comment.subComments.length; i++) {
+          let sc = comment.subComments[i]
+          if (sc._id.toString() == req.body._id) {
+            comment.subComments.splice(i, 1)
+          }
+        }
+      }
+      return comment.save()
+    })
+    .then(() => res.send('Comment Modified'))
+    .catch(err => res.status(400).send(err))
+})
+
 
 router.delete('/:id', (req, res, next) => {
   Comments.findById(req.params.id)
@@ -49,21 +68,21 @@ router.delete('/:id', (req, res, next) => {
 //Subcomments
 
 //Create SubComment
-router.post('/:commentId/subComments', (req, res, next) => {
-  // SubComments.create(req.body)
-  //   .then(subComments => res.send(subComments))
-  //   .catch(err => res.status(400).send(err))
-  Comments.findById(req.params.commentId)
-    .then(comment => {
-      comment.subComments.push(req.body)
-      comment.save(err => {
-        if (err) {
-          res.status(400).send(err)
-        }
-        res.status(201).send(comment)
-      })
-    })
-})
+// router.post('/:commentId/subComments', (req, res, next) => {
+//   // SubComments.create(req.body)
+//   //   .then(subComments => res.send(subComments))
+//   //   .catch(err => res.status(400).send(err))
+//   Comments.findById(req.params.commentId)
+//     .then(comment => {
+//       comment.subComments.push(req.body)
+//       comment.save(err => {
+//         if (err) {
+//           res.status(400).send(err)
+//         }
+//         res.status(201).send(comment)
+//       })
+//     })
+// })
 
 //Edit Subcomment
 router.put('/:commentId/subComments/:id', async (req, res, next) => {

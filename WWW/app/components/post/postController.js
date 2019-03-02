@@ -71,6 +71,21 @@ export default class PostController {
     form.reset()
   }
 
+  addSubComment(event, id) {
+
+    event.preventDefault();
+    let form = event.target
+    let newComment = {
+      username: form.username.value,
+      description: form.description.value,
+      url: form.url.value,
+      commentId: id
+    }
+    _ps.addSubComment(newComment)
+    form.reset()
+    // document.getElementById(id + 'subform').setAttribute('hidden', 'true')
+  }
+
   setActivePost(id) {
     _ps.getApiComments(id)
     _ps.setActivePost(id)
@@ -82,6 +97,7 @@ export default class PostController {
 
     })
   }
+
 
   drawHome() {
     draw()
@@ -108,7 +124,7 @@ export default class PostController {
     _ps.deleteSubComment(parentId, id)
   }
 
-  editPost(event) {
+  editPost(event, id) {
     event.preventDefault();
     let form = event.target
     let newPost = {
@@ -124,5 +140,7 @@ export default class PostController {
     _ps.setActivePost(_ps.ActivePost._id)
   }
 
-  // subCommentVote(parentId, Id, num)  
+  subCommentVote(parentId, Id, num) {
+    _ps.subCommentVote(parentId, Id, num)
+  }
 }
